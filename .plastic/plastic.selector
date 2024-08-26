@@ -1,0 +1,4 @@
+repository "ScreamSecrets@ddmo@cloud"
+  path "/"
+    br "/main"
+    co "/main"
