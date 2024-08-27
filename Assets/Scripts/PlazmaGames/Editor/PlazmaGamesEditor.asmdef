@@ -2,7 +2,7 @@
     "name": "PlazmaGamesEditor",
     "rootNamespace": "PlazmaGames.Editor",
     "references": [
-        "GUID:578efba921b0add4286e0b4b91cd03fa"
+        "GUID:c322ced13a63a9edb88720046d280048"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

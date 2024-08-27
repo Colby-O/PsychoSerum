@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1924812598744533824}
   - component: {fileID: 171504866869979726}
   - component: {fileID: 2549412724384406842}
-  - component: {fileID: 492147216829211783}
   m_Layer: 0
   m_Name: MazeRoomDoor.001
   m_TagString: Untagged
@@ -89,28 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &492147216829211783
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583686862259592515}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7322027102606765600, guid: e586f0a0e51fe56a8a27946a90e87629, type: 3}
 --- !u!1 &1341076882045301724
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,8 +174,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 3, z: 2}
-  m_Center: {x: 0, y: 0.25, z: -0.92}
+  m_Size: {x: 0.2824824, y: 3, z: 1.8921676}
+  m_Center: {x: 0.0005720258, y: 0.25, z: -0.882172}
 --- !u!114 &1571774336994578120
 MonoBehaviour:
   m_ObjectHideFlags: 0
