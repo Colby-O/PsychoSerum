@@ -15,7 +15,7 @@ namespace PsychoSerum.Rendering
 
 		[Header("Screen Parameters")]
 		[SerializeField] private Vector2 _screenResolution = new Vector2(256.0f, 256.0f);
-		[SerializeField, Range(0, 10)] private float _screenBend = 3.0f;
+		[SerializeField, Range(0, 1000)] private float _screenBend = 3.0f;
 
 		[Header("Vignette Parameters")]
 		[SerializeField, Range(0, 1)] private float _screenRoundness = 1.0f;

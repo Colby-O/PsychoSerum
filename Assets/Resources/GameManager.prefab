@@ -174,7 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _monoSystemParnet: {fileID: 5446073871018378231}
-  _animationMonoSystem: {fileID: 5185717270006648178}
+  _uiMonoSystem: {fileID: 3624713713443314702}
+  _animationMonoSystem: {fileID: 6954216782301943671}
   _audioMonoSystem: {fileID: 1370560985889638869}
   _puzzleMonoSystem: {fileID: 5294151059966726961}
 --- !u!1 &4113897271268753655
@@ -186,7 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7443909549904906186}
-  - component: {fileID: 5185717270006648178}
+  - component: {fileID: 6954216782301943671}
   m_Layer: 0
   m_Name: AnimationMonoSystem
   m_TagString: Untagged
@@ -209,7 +210,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3192590246571243893}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5185717270006648178
+--- !u!114 &6954216782301943671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,7 +219,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4113897271268753655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 019a2c83772a2a370a2b23ddff0afee8, type: 3}
+  m_Script: {fileID: 11500000, guid: df4f200d6311caf4aaaab927e9b55bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4628391363790401627
@@ -423,6 +424,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1045346784789994259}
   - {fileID: 7443909549904906186}
   - {fileID: 5099209377173012568}
   - {fileID: 1425271692119084754}
@@ -486,3 +488,49 @@ MonoBehaviour:
   _musicSource: {fileID: 40637218356181579}
   _ambientSource: {fileID: 2100290737665319395}
   _audioSources: []
+--- !u!1 &7383493838844237167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1045346784789994259}
+  - component: {fileID: 3624713713443314702}
+  m_Layer: 0
+  m_Name: UIMonoSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1045346784789994259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383493838844237167}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3192590246571243893}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3624713713443314702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383493838844237167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 247e84a4f584dd347b667c50b3adee84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingView: {fileID: 0}
+  _views: []

@@ -11,7 +11,8 @@ namespace PsychoSerum.Player
 	internal sealed class PlayerController : MonoBehaviour
 	{
 		[Header("References")]
-		[SerializeField] private PlayerSettings _playerSettings;
+        [SerializeField] private GameObject _viewCover;
+        [SerializeField] private PlayerSettings _playerSettings;
 		[SerializeField] private CharacterController _characterController;
 		[SerializeField] private PlayerInput _playerInput;
         [SerializeField] private AudioSource _audioSource;
@@ -100,6 +101,11 @@ namespace PsychoSerum.Player
             _playerRotation = (transform.localRotation * Quaternion.Euler(0f, angle, 0f)).eulerAngles;
         }
 
+		public void ToggleView(bool show)
+		{
+			_viewCover.SetActive(!show);
+		}
+
         private void Awake()
 		{
 			if (_playerSettings == null) _playerSettings = new PlayerSettings();
@@ -118,6 +124,8 @@ namespace PsychoSerum.Player
 
 		private void Update()
 		{
+			if (!PsychoSerumGameManager.allowInput) return;
+
             ProcessView();
             ProcessMovement();
             if (_movementSpeed.magnitude < 0.01f) _audioSource.Stop();

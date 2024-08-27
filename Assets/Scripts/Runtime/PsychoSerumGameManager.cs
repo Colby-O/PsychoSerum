@@ -4,6 +4,7 @@ using UnityEngine;
 using PlazmaGames.Core;
 using PlazmaGames.MonoSystems.Animation;
 using PsychoSerum.MonoSystem;
+using PsychoSerum.Player;
 
 namespace PsychoSerum
 {
@@ -13,9 +14,25 @@ namespace PsychoSerum
 		[SerializeField] private GameObject _monoSystemParnet;
 
 		[Header("MonoSystems")]
-		[SerializeField] private AnimationMonoSystem _animationMonoSystem;
+        [SerializeField] private UIMonoSystem _uiMonoSystem;
+        [SerializeField] private AnimationMonoSystem _animationMonoSystem;
         [SerializeField] private AudioMonoSystem _audioMonoSystem;
         [SerializeField] private PuzzleMonoSystem _puzzleMonoSystem;
+
+		public static bool allowInput = false;
+        public static bool hasStarted = false;
+
+		public static PlayerController player;
+
+		public static void StartGame()
+		{
+			hasStarted = true;
+			allowInput = true;
+			Camera.main.GetComponent<AudioListener>().enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            player.ToggleView(true);
+        }
 
         /// <summary>
         /// Adds all events listeners
@@ -38,7 +55,8 @@ namespace PsychoSerum
 		/// </summary>
 		private void AttachMonoSystems()
 		{
-			AddMonoSystem<AnimationMonoSystem, IAnimationMonoSystem>(_animationMonoSystem);
+            AddMonoSystem<UIMonoSystem, IUIMonoSystem>(_uiMonoSystem);
+            AddMonoSystem<AnimationMonoSystem, IAnimationMonoSystem>(_animationMonoSystem);
             AddMonoSystem<AudioMonoSystem, IAudioMonoSystem>(_audioMonoSystem);
             AddMonoSystem<PuzzleMonoSystem, IPuzzleMonoSystem>(_puzzleMonoSystem);
         }
@@ -62,12 +80,13 @@ namespace PsychoSerum
 
 		private void Awake()
 		{
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
+			//Cursor.lockState = CursorLockMode.Locked;
+			//Cursor.visible = false;
 		}
 
         private void Start()
         {
+            player = FindAnyObjectByType<PlayerController>();
             _audioMonoSystem.PlayAudio("ambient_1", MonoSystem.AudioType.Ambient, true);
         }
     }

@@ -53,6 +53,7 @@ namespace PsychoSerum.Interactables
 
         private void FixedUpdate()
         {
+            if (!PsychoSerumGameManager.hasStarted) return;
             if (_isGateOpening) return;
 
             _elevatorPos = Mathf.Clamp(_elevatorPos - _elevatorSpeed, 0, 1);

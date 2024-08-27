@@ -9,22 +9,42 @@ namespace PsychoSerum.Lighting
     internal class FlickerLight : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private Light _light;
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private List<Light> _lights;
 
         [Header("Settings")]
-        [SerializeField] private Vector2 _delayLimits;
+        [SerializeField] private Vector2 _flickerDelayLimits;
+        [SerializeField] private Vector2 _recoverDelayLimits;
 
         private bool _isFlickering;
         private float _delay;
 
+        private void LightEnable()
+        {
+            foreach (Light light in _lights)
+            {
+                light.enabled = true;
+            }
+            _audioSource?.Play();
+        }
+
+        private void LightDisable()
+        {
+            foreach (Light light in _lights)
+            {
+                light.enabled = false;
+            }
+            _audioSource?.Stop();
+        }
+
         private IEnumerator Flicker()
         {
             _isFlickering = true;
-            _light.enabled = false;
-            _delay = Random.Range(_delayLimits.x, _delayLimits.y);
+            LightDisable();
+            _delay = Random.Range(_flickerDelayLimits.x, _flickerDelayLimits.y);
             yield return new WaitForSeconds(_delay);
-            _light.enabled = true;
-            _delay = Random.Range(_delayLimits.x, _delayLimits.y);
+            LightEnable();
+            _delay = Random.Range(_recoverDelayLimits.x, _recoverDelayLimits.y);
             yield return new WaitForSeconds(_delay);
             _isFlickering = false;
         }
