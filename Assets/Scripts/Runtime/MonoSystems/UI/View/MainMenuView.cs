@@ -101,6 +101,7 @@ namespace PsychoSerum.MonoSystem
 
         private void StartGame()
         {
+            GameManager.GetMonoSystem<IAudioMonoSystem>().StopAudio(AudioType.Music);
             _background.gameObject.SetActive(false);
             _backgroundCamera.gameObject.SetActive(false);
             _audioSource.PlayOneShot(_clickSound);
@@ -169,6 +170,8 @@ namespace PsychoSerum.MonoSystem
 
         public override void Init()
         {
+            GameManager.GetMonoSystem<IAudioMonoSystem>().PlayAudio("MainMenu", AudioType.Music, true);
+
             Camera.main.GetComponent<AudioListener>().enabled = false;
             _renderTexture = CreateRenderTexture();
             _backgroundCamera.targetTexture = _renderTexture;

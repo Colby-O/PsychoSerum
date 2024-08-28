@@ -60,7 +60,7 @@ namespace PsychoSerum.Interactables
 
         public bool Interact(Interactor interactor)
         {
-            if (_portal.other == null) return false;
+            if (_portal.other == null || GameManager.GetMonoSystem<IAnimationMonoSystem>().HasAnimationRunning(this)) return false;
 
             if (!_isOpen)
             {

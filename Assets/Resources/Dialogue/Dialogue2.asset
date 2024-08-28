@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dialogue2
   m_EditorClassIdentifier: 
   _dialogues:
-  - msg: Please make your way to the elevator and we can begin our testing.
+  - msg: Please make your way to the elevator and we can begin the test.
     dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}

@@ -11,16 +11,16 @@ namespace PsychoSerum
     {
         [SerializeField] private int _id;
 
-        [SerializeField] private bool _isActive = true;
-
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip _audioClip;
+
+        public bool isActive = true;
 
         private bool _triggered = false;
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!_isActive) return;
+            if (!isActive) return;
 
             if (!_triggered && other.tag == "Player")
             {

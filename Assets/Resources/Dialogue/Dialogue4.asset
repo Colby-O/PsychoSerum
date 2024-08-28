@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a35a24b3da178644af2fc549558f8f7, type: 3}
   m_Name: Dialogue4
   m_EditorClassIdentifier: 
-  _dialogues: []
+  _dialogues:
+  - msg: 'This first test is designed to test the serum''s effect on memory retention. '
+    dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}
+  - msg: "You\u2019re going to have 60 seconds to memorize the pattern on the monitor.
+      After which you are asked to place each cube on its corresponding plate. "
+    dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}
+  - msg: Goodluck.
+    dialogueEvent: {fileID: 11400000, guid: 3c6f57e067d807c47aba35f1ac2180fa, type: 2}

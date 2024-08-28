@@ -13,9 +13,5 @@ MonoBehaviour:
   m_Name: Dialogue3
   m_EditorClassIdentifier: 
   _dialogues:
-  - msg: "Welcome, to the heart of our experiment. You\u2019ve made it this far,
-      and now it\u2019s time to put your mind to the test. We\u2019ll start with
-      a simple task."
-    dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}
-  - msg: Make your way to Laboratory Room 1.
+  - msg: "We\u2019ll start with a simple task. Make your way to Laboratory Room 1."
     dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}

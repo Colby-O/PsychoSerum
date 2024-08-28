@@ -581,7 +581,10 @@ MonoBehaviour:
   _ambientSound: 0.05
   _sfxSound: 1
   _musicSound: 1
-  _musicSounds: []
+  _musicSounds:
+  - id: 0
+    name: MainMenu
+    audio: {fileID: 8300000, guid: 8ffcdc78a27af5049a5a87a7093be8b1, type: 3}
   _ambientSounds:
   - id: 0
     name: ambient_1

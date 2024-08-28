@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a35a24b3da178644af2fc549558f8f7, type: 3}
   m_Name: Dialogue6
   m_EditorClassIdentifier: 
-  _dialogues: []
+  _dialogues:
+  - msg: 'These results are lackluster. '
+    dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}
+  - msg: Please make your way to Laboratory Room 2 and we can begin the second test.
+    dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}

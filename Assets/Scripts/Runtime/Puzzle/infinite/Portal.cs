@@ -1,17 +1,24 @@
+using PsychoSerum.Interactables;
 using PsychoSerum.Player;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace PsychoSerum.Puzzle
 {
     internal class Portal : MonoBehaviour
     {
+        public int id;
+        
         public Portal other;
+        public PortalDoor door;
 
         public GameObject display;
         public Camera view;
         public Transform target;
+
+        public TMP_Text label;
 
         public RenderTexture renderTexture;
 

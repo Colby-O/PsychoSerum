@@ -8,6 +8,9 @@ TagManager:
   - Jumpscare1
   - Door2
   - Door3
+  - Jumpscare2
+  - Trigger4
+  - Door4
   layers:
   - Default
   - TransparentFX
@@ -19,9 +22,9 @@ TagManager:
   - Menu
   - Text
   - Block
-  - 
-  - 
-  - 
+  - Portal
+  - Hint
+  - FakeHint
   - 
   - 
   - 

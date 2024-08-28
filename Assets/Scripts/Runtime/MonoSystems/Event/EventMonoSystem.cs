@@ -57,9 +57,11 @@ namespace PsychoSerum.MonoSystem
 
         public void Event6()
         {
-            GameObject.FindWithTag("Trigger4").SetActive(true);
+            GameObject.FindWithTag("Trigger4").GetComponent<Trigger>().isActive = true;
             Door door = GameObject.FindWithTag("Door3").GetComponent<Door>();
+            Door door2 = GameObject.FindWithTag("Door4").GetComponent<Door>();
             door.Unlock();
+            door2.Unlock();
             GameManager.GetMonoSystem<IDialogueMonoSystem>().Load(_dialouges[4]);
 
             FindObjectOfType<Taskboard>().MarkTaskComplete(2);
@@ -68,9 +70,11 @@ namespace PsychoSerum.MonoSystem
 
         public void Event7()
         {
-            GameObject.FindWithTag("Trigger4").SetActive(true);
+            GameObject.FindWithTag("Trigger4").GetComponent<Trigger>().isActive = true;
             Door door = GameObject.FindWithTag("Door3").GetComponent<Door>();
+            Door door2 = GameObject.FindWithTag("Door4").GetComponent<Door>();
             door.Unlock();
+            door2.Unlock();
             GameManager.GetMonoSystem<IDialogueMonoSystem>().Load(_dialouges[5]);
 
             FindObjectOfType<Taskboard>().MarkTaskComplete(2);

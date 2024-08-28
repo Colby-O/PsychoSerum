@@ -47,7 +47,7 @@ namespace PsychoSerum.Player
 
         public void StartExamine(Transform obj, ExamineType type, GameObject offset, string text = "", bool isMoveable = false)
 		{
-			if (obj == null) return;
+			if (obj == null && !_isExaming) return;
 
 			_firstLoop = true;
 
