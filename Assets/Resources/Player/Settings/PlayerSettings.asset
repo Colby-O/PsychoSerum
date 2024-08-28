@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f05e259b72ca941b8decaa8f49ca41, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
+  sensitivityMax: 12
+  sensitivityMin: 4
   sensitivityX: 8
   sensitivityY: 8
   invertedViewX: 0
@@ -21,9 +23,6 @@ MonoBehaviour:
   walkingForwardSpeed: 8
   walkingBackwardSpeed: 8
   walkingStrateSpeed: 8
-  runningForwardSpeed: 0
-  runningBackwardSpeed: 0
-  runningStrateSpeed: 0
   movementSmoothing: 0
   speedEffector: 1
   crouchSpeedEffector: 0

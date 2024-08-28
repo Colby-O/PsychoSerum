@@ -33,5 +33,15 @@ namespace PsychoSerum.Puzzle
         {
             if (_mazeController == null) _mazeController = FindAnyObjectByType<MazeController>();
         }
+
+        public bool IsPickupable()
+        {
+            return false;
+        }
+
+        public void OnPickup(Interactor interactor)
+        {
+            
+        }
     }
 }

@@ -140,5 +140,15 @@ namespace PsychoSerum.Interactables
                 );
             }
         }
+
+        public bool IsPickupable()
+        {
+            return false;
+        }
+
+        public void OnPickup(Interactor interactor)
+        {
+
+        }
     }
 }

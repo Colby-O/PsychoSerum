@@ -15,9 +15,12 @@ namespace PsychoSerum.Interactables
         [SerializeField] private float _rotationAmount = 90.0f;
         [SerializeField][Range(-1, 1)] private float _forwardDirection = 0;
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _lockedSound;
+        [SerializeField] private AudioClip _unlockSound;
+
+        [SerializeField] private bool _isLocked;
 
         private bool _isOpen;
-        private bool _isLocked;
         private Vector3 _startRotation;
         private Vector3 _forward;
 
@@ -43,7 +46,7 @@ namespace PsychoSerum.Interactables
             );
         }
 
-        private void Close()
+        public void Close()
         {
             _isOpen = false;
             Quaternion start = transform.localRotation;
@@ -57,7 +60,11 @@ namespace PsychoSerum.Interactables
 
         public bool Interact(Interactor interactor)
         {
-            if (_isLocked) return true;
+            if (_isLocked)
+            {
+                _audioSource.PlayOneShot(_lockedSound);
+                return true;
+            }
 
             if (!_isOpen)
             {
@@ -78,10 +85,32 @@ namespace PsychoSerum.Interactables
 
         }
 
+        public void Unlock()
+        {
+            _audioSource.PlayOneShot(_unlockSound);
+            _isLocked = false;
+        }
+
+        public void Lock()
+        {
+            _audioSource.PlayOneShot(_unlockSound);
+            _isLocked = true;
+        }
+
         private void Awake()
         {
             if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
             _forward = -transform.right;
+        }
+
+        public bool IsPickupable()
+        {
+            return false;
+        }
+
+        public void OnPickup(Interactor interactor)
+        {
+            
         }
     }
 }

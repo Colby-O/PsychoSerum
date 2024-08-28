@@ -5,6 +5,7 @@ using PlazmaGames.Core;
 using PlazmaGames.MonoSystems.Animation;
 using PsychoSerum.MonoSystem;
 using PsychoSerum.Player;
+using PsychoSerum.Task;
 
 namespace PsychoSerum
 {
@@ -18,20 +19,25 @@ namespace PsychoSerum
         [SerializeField] private AnimationMonoSystem _animationMonoSystem;
         [SerializeField] private AudioMonoSystem _audioMonoSystem;
         [SerializeField] private PuzzleMonoSystem _puzzleMonoSystem;
+        [SerializeField] private DialogueMonoSystem _dialogueMonoSystem;
+		[SerializeField] private EventMonoSystem _eventMonoSystem;
 
-		public static bool allowInput = false;
+        public List<DialogueSO> dialogues;
+
+        public static bool allowInput = false;
         public static bool hasStarted = false;
 
 		public static PlayerController player;
+		public static PsychoSerumGameManager Instance => (PsychoSerumGameManager)_instance;
+
 
 		public static void StartGame()
 		{
 			hasStarted = true;
 			allowInput = true;
 			Camera.main.GetComponent<AudioListener>().enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
             player.ToggleView(true);
+			Instance._eventMonoSystem.RunEvent(0);
         }
 
         /// <summary>
@@ -59,6 +65,8 @@ namespace PsychoSerum
             AddMonoSystem<AnimationMonoSystem, IAnimationMonoSystem>(_animationMonoSystem);
             AddMonoSystem<AudioMonoSystem, IAudioMonoSystem>(_audioMonoSystem);
             AddMonoSystem<PuzzleMonoSystem, IPuzzleMonoSystem>(_puzzleMonoSystem);
+            AddMonoSystem<DialogueMonoSystem, IDialogueMonoSystem>(_dialogueMonoSystem);
+            AddMonoSystem<EventMonoSystem, IEventMonoSystem>(_eventMonoSystem);
         }
 
 		protected override string GetApplicationName()

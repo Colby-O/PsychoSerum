@@ -8,6 +8,10 @@ namespace PsychoSerum.Interfaces
 {
     internal interface IInteractable 
     {
+        public bool IsPickupable();
+
+        public void OnPickup(Interactor interactor);
+
         /// <summary>
         /// Interaction with a Interactor
         /// </summary>

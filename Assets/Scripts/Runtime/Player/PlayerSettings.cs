@@ -8,6 +8,8 @@ namespace PsychoSerum.Player
     internal sealed class PlayerSettings : ScriptableObject
     {
         [Header("View Settings")]
+        public float sensitivityMax;
+        public float sensitivityMin;
         public float sensitivityX;
         public float sensitivityY;
         public bool invertedViewX;
@@ -19,11 +21,6 @@ namespace PsychoSerum.Player
         public float walkingForwardSpeed;
         public float walkingBackwardSpeed;
         public float walkingStrateSpeed;
-
-        [Header("Movement -- Running")]
-        public float runningForwardSpeed;
-        public float runningBackwardSpeed;
-        public float runningStrateSpeed;
         public float movementSmoothing;
 
         [Header("Speed Effects")]

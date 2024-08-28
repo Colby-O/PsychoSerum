@@ -31,7 +31,6 @@ namespace PsychoSerum.MonoSystem
         [SerializeField] private AudioClip _clickSound;
 
         private RenderTexture _renderTexture;
-        private RenderTexture _textRenderTexture;
 
         private bool _firstCall = true;
 
@@ -106,12 +105,15 @@ namespace PsychoSerum.MonoSystem
             _backgroundCamera.gameObject.SetActive(false);
             _audioSource.PlayOneShot(_clickSound);
             PsychoSerumGameManager.StartGame();
-            Hide();
+            GameManager.GetMonoSystem<IUIMonoSystem>().Show<GameView>();
         }
 
         public override void Show()
         {
             base.Show();
+
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
 
             if (!_firstCall)
             {
@@ -159,6 +161,8 @@ namespace PsychoSerum.MonoSystem
         public override void Hide()
         {
             base.Hide();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             HideMenu();
         }
 
@@ -167,11 +171,9 @@ namespace PsychoSerum.MonoSystem
         {
             Camera.main.GetComponent<AudioListener>().enabled = false;
             _renderTexture = CreateRenderTexture();
-            _textRenderTexture = CreateRenderTexture();
             _backgroundCamera.targetTexture = _renderTexture;
-            _textCamera.targetTexture = _textRenderTexture;
             _background.texture = _renderTexture;
-            _backgroundUI.texture = _textRenderTexture;
+            _backgroundUI.texture = _textCamera.targetTexture;
 
             HideMenu();
 

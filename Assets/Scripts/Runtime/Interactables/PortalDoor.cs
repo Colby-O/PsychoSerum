@@ -90,5 +90,15 @@ namespace PsychoSerum.Interactables
             if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
             _forward = -transform.right;
         }
+
+        public bool IsPickupable()
+        {
+            return false;
+        }
+
+        public void OnPickup(Interactor interactor)
+        {
+
+        }
     }
 }

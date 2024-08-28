@@ -12,13 +12,17 @@ namespace PsychoSerum.Inspectables
         ComeTo
     }
 
-    internal sealed class InspectableObject : MonoBehaviour, IInteractable
+    internal class InspectableObject : MonoBehaviour, IInteractable
     {
-        [SerializeField] private ExamineType _type = ExamineType.Goto;
-        [SerializeField] private GameObject offsetPoint = null;
+        [SerializeField] protected ExamineType _type = ExamineType.Goto;
+        [SerializeField] protected GameObject offsetPoint = null;
 
-        public bool Interact(Interactor interactor)
+        [SerializeField] protected AudioSource _auidoSource;
+        [SerializeField] protected AudioClip _auidoclip;
+
+        public virtual bool Interact(Interactor interactor)
         {
+            _auidoSource.PlayOneShot(_auidoclip);
             Inspector inspector = interactor.GetComponent<Inspector>();
             PlayerController pc = interactor.GetComponent<PlayerController>();
             pc.ZeroInput();
@@ -31,5 +35,14 @@ namespace PsychoSerum.Inspectables
 
         }
 
+        public virtual bool IsPickupable()
+        {
+            return false;
+        }
+
+        public virtual void OnPickup(Interactor interactor)
+        {
+
+        }
     }
 }

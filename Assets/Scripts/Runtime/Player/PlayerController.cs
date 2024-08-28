@@ -1,5 +1,10 @@
+using PlazmaGames.Core;
+using PsychoSerum.MonoSystem;
+using PsychoSerum.Task;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,12 +16,14 @@ namespace PsychoSerum.Player
 	internal sealed class PlayerController : MonoBehaviour
 	{
 		[Header("References")]
+        [SerializeField] private PickupManager _pickupManager;
+        [SerializeField] private Inspector _inspector;
         [SerializeField] private GameObject _viewCover;
         [SerializeField] private PlayerSettings _playerSettings;
 		[SerializeField] private CharacterController _characterController;
 		[SerializeField] private PlayerInput _playerInput;
         [SerializeField] private AudioSource _audioSource;
-
+		[SerializeField] private Taskboard _task;
         [Header("Body Part References")]
 		[SerializeField] private GameObject _head;
 
@@ -27,8 +34,9 @@ namespace PsychoSerum.Player
 
 		private InputAction _moveAction;
 		private InputAction _lookAction;
+        private InputAction _pauseAction;
 
-		private Vector3 _playerRotation;
+        private Vector3 _playerRotation;
 		private Vector3 _headRotation;
 
 		private Vector2 _rawMovementInput;
@@ -36,6 +44,8 @@ namespace PsychoSerum.Player
 
 		private Vector3 _movementSpeed;
 		private Vector3 _movementSpeedVel;
+
+		private bool _inTaskMenu = false;
 
 		private void HandleMovementAction(InputAction.CallbackContext e)
 		{
@@ -106,26 +116,51 @@ namespace PsychoSerum.Player
 			_viewCover.SetActive(!show);
 		}
 
+		public PlayerSettings GetPlayerSetings()
+		{
+			return _playerSettings;
+		}
+
+        private void HandlePuase(InputAction.CallbackContext e)
+		{
+			if (!PsychoSerumGameManager.allowInput || _inspector.IsExaming) return;
+			PsychoSerumGameManager.allowInput = false;
+			GameManager.GetMonoSystem<IUIMonoSystem>().Show<PausedView>();
+        }
+
+		public PickupManager GetPickupManager()
+		{
+			return _pickupManager;
+		}
+
         private void Awake()
 		{
 			if (_playerSettings == null) _playerSettings = new PlayerSettings();
 			if (_characterController == null) _characterController = GetComponent<CharacterController>();
 			if (_playerInput == null) _playerInput = GetComponent<PlayerInput>();
 			if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
+            if (_inspector == null) _inspector = GetComponent<Inspector>();
+			if (_pickupManager == null) _pickupManager = GetComponent<PickupManager>();	
 
             _headRotation = _head.transform.localRotation.eulerAngles;
 
 			_moveAction = _playerInput.actions["Movement"];
 			_lookAction = _playerInput.actions["Look"];
+            _pauseAction = _playerInput.actions["Esc"];
 
-			_moveAction.performed += HandleMovementAction;
+            _moveAction.performed += HandleMovementAction;
 			_lookAction.performed += HandleLookAction;
-		}
+			_pauseAction.performed += HandlePuase;
+        }
 
 		private void Update()
 		{
-			if (!PsychoSerumGameManager.allowInput) return;
-
+			if (!PsychoSerumGameManager.allowInput || (_inspector.IsExaming && !_inspector.IsMoveable))
+			{
+				ZeroInput();
+                _playerInput.enabled = false;
+			}
+            else _playerInput.enabled = true;
             ProcessView();
             ProcessMovement();
             if (_movementSpeed.magnitude < 0.01f) _audioSource.Stop();
