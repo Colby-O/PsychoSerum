@@ -193,6 +193,7 @@ MonoBehaviour:
   _audioSource: {fileID: 2128359781377897006}
   _lockedSound: {fileID: 8300000, guid: 0b4a386d11b185041965b01fdc4f1bca, type: 3}
   _unlockSound: {fileID: 8300000, guid: 0b4a386d11b185041965b01fdc4f1bca, type: 3}
+  _bangSound: {fileID: 8300000, guid: 4066a36a99447904c9df6499a5216e17, type: 3}
   _isLocked: 0
 --- !u!82 &2128359781377897006
 AudioSource:

@@ -39,6 +39,8 @@ namespace PsychoSerum.Puzzle
 
 		[SerializeField] private float _timer = 0;
 
+		private bool _hasBegin = false;
+
 		public Maze GetMaze() { return _maze; }
 		public Vector3 GetMazePosition() { return _position; }
 		public float GetMazeScale() { return _scaleX; }
@@ -61,7 +63,11 @@ namespace PsychoSerum.Puzzle
 				() => {
 					foreach (GameObject obj in _objects) Destroy(obj);
 					_objects = new List<GameObject>();
-				}
+
+                    GameManager.GetMonoSystem<IUIMonoSystem>().ShowLast();
+                    GameManager.GetMonoSystem<IUIMonoSystem>().Show<GameView>();
+                    GameManager.GetMonoSystem<IEventMonoSystem>().RunEvent((_timeLimit > GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().GetTime()) ? 14 : 15);
+                }
 			);
 		}
 
@@ -250,14 +256,19 @@ namespace PsychoSerum.Puzzle
 					}
 				}
 			}
-
-            GameManager.GetMonoSystem<IUIMonoSystem>().Show<GameView>();
-            GameManager.GetMonoSystem<IEventMonoSystem>().RunEvent(15);
         }
 
-		public void Begin()
+		public bool HadBegin()
+		{
+			return _hasBegin;
+
+        }
+
+
+        public void Begin()
 		{
 			if (!_isStarted) return;
+			_hasBegin = true;
             OpenGate();
             GameManager.GetMonoSystem<IUIMonoSystem>().Show<TimerView>(this);
             GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().StartTimer();
