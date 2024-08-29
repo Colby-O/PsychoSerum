@@ -219,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monoSystemParnet: {fileID: 5446073871018378231}
   _uiMonoSystem: {fileID: 3624713713443314702}
-  _animationMonoSystem: {fileID: 6954216782301943671}
+  _animationMonoSystem: {fileID: 8479560316244297274}
   _audioMonoSystem: {fileID: 1370560985889638869}
   _puzzleMonoSystem: {fileID: 5294151059966726961}
   _dialogueMonoSystem: {fileID: 1319133865069375}
@@ -280,6 +280,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d5e3e6de28466c4a8b850f300ec0642, type: 2}
   - {fileID: 11400000, guid: b3d82d2f8c7e2bd4f9fb96798fddd4e8, type: 2}
   - {fileID: 11400000, guid: e3f4331481332814bbcb6ec36a9df06f, type: 2}
+  - {fileID: 11400000, guid: fc31ff8a785a65f43a5a8414c97665ba, type: 2}
+  - {fileID: 11400000, guid: d9c753fd55158fd4da9edaa75397ff1d, type: 2}
 --- !u!1 &4113897271268753655
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7443909549904906186}
-  - component: {fileID: 6954216782301943671}
+  - component: {fileID: 8479560316244297274}
   m_Layer: 0
   m_Name: AnimationMonoSystem
   m_TagString: Untagged
@@ -312,7 +314,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3192590246571243893}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6954216782301943671
+--- !u!114 &8479560316244297274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -321,7 +323,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4113897271268753655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 019a2c83772a2a370a2b23ddff0afee8, type: 3}
+  m_Script: {fileID: 11500000, guid: df4f200d6311caf4aaaab927e9b55bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4628391363790401627

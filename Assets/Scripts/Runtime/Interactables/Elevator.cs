@@ -17,6 +17,7 @@ namespace PsychoSerum.Interactables
 
         [SerializeField] private AudioSource _audioSrc;
         [SerializeField] private AudioClip _gateSound;
+        [SerializeField] private AudioClip _buttonSound;
         [SerializeField] private Transform _elevator;
         [SerializeField] private Transform _gateTop;
         [SerializeField] private Transform _gateBottom;
@@ -35,7 +36,8 @@ namespace PsychoSerum.Interactables
 		public bool Interact(Interactor interactor)
 		{
             if (_isGateOpening) return false;
-			_elevatorSpeed *= -1;
+            _audioSrc.PlayOneShot(_buttonSound);
+            _elevatorSpeed *= -1;
 			return true;
 		}
 

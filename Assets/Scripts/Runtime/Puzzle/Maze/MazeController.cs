@@ -13,8 +13,9 @@ namespace PsychoSerum.Puzzle
 		[Header("Maze Settings")]
 		[SerializeField][Min(7)] private int _mazeWidth;
 		[SerializeField][Min(2)] private int _mazeHeight;
+        [SerializeField] private float _timeLimit = 60;
 
-		[Header("Maze Prefabs")]
+        [Header("Maze Prefabs")]
 		[SerializeField] private GameObject _wallPrefab;
 		[SerializeField] private GameObject _floorPrefab;
 		[SerializeField] private GameObject _keyPrefab;
@@ -112,7 +113,16 @@ namespace PsychoSerum.Puzzle
 					floor.transform.position = transform.position + new Vector3(y * _scaleZ, 0, x * _scaleX);
 					floor.transform.parent = _mazeHolder.transform;
 
-					floor.transform.GetChild(2).gameObject.SetActive(Random.Range(0, 100) % 2 == 1);
+					if (Random.value > 0.25f)
+					{
+                        floor.transform.GetChild(2).gameObject.SetActive(Random.value < 0.1f);
+                    }
+					else
+					{
+                        floor.transform.GetChild(6).gameObject.SetActive(Random.value < 0.1f);
+
+                    }
+
 
 					if (_maze[x, y] == 1)
 					{
@@ -124,8 +134,8 @@ namespace PsychoSerum.Puzzle
 							key.transform.position = transform.position + new Vector3(y * _scaleZ, 1f, x * _scaleX);
 							key.transform.parent = _mazeHolder.transform;
 							_objects.Add(key);
-
-							floor.transform.GetChild(4).gameObject.SetActive(true);
+                            floor.transform.GetChild(2).gameObject.SetActive(true);
+                            floor.transform.GetChild(4).gameObject.SetActive(true);
 						} else if (x == 1 && y == 0)
 						{
 							floor.transform.GetChild(3).gameObject.SetActive(true);
@@ -166,8 +176,9 @@ namespace PsychoSerum.Puzzle
 
 					floor.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = Color.clear;
 					floor.transform.GetChild(2).gameObject.SetActive(false); // Turns off light for this cell.
+                    floor.transform.GetChild(6).gameObject.SetActive(false);
 
-					GameObject wall = Instantiate(_wallPrefab);
+                    GameObject wall = Instantiate(_wallPrefab);
 					wall.transform.position = transform.position + new Vector3(y * _scaleZ, 0, x * _scaleX);
 					wall.transform.parent = _mazeHolder.transform;
 					_objects.Add(wall);
@@ -187,7 +198,8 @@ namespace PsychoSerum.Puzzle
 
 		private void OpenGate()
 		{
-			float start = _gate.localPosition.z;
+			_gateLimits.x = _gate.localPosition.z;
+            float start = _gate.localPosition.z;
 			float end = _gateLimits.y;
 			_gateAudioSrc.PlayOneShot(_gateAudioClip);
 			GameManager.GetMonoSystem<IAnimationMonoSystem>().RequestAnimation(
@@ -198,33 +210,31 @@ namespace PsychoSerum.Puzzle
 					_gate,
 					start,
 					end
-				),
-				() => StartTimer()
+				)
 			);
 		}
 
-		private void StartTimer()
-		{
-			_timer = 0;
-			_isTimerRunning = true;
-		}
+        public void CloseGate()
+        {
+            float start = _gate.localPosition.z;
+            float end = _gateLimits.x;
+            _gateAudioSrc.PlayOneShot(_gateAudioClip);
+            GameManager.GetMonoSystem<IAnimationMonoSystem>().RequestAnimation(
+                this,
+                _gateAudioClip.length,
+                (float t) => OpenGateStep(
+                    t,
+                    _gate,
+                    start,
+                    end
+                )
+            );
+        }
 
-		private void StopTimer()
-		{
-			_isTimerRunning = false;
-		}
-
-		public void Begin()
-		{
-			if (_isStarted) return;
-		   _isStarted = true;
-			OpenGate();
-		}
-
-		public void End()
+        public void End()
 		{
 			_isStarted = false;
-			StopTimer();
+			_gate.gameObject.SetActive(false);
 			ClearMaze();
 			for (int y = 0; y < _maze.height; y++)
 			{
@@ -240,14 +250,23 @@ namespace PsychoSerum.Puzzle
 				}
 			}
 
-			GameManager.GetMonoSystem<IPuzzleMonoSystem>().FinishPuzzle(this, PuzzleType.Maze);
-		}
+            GameManager.GetMonoSystem<IUIMonoSystem>().ShowLast();
+            GameManager.GetMonoSystem<IEventMonoSystem>().RunEvent((_timeLimit > GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().GetTime()) ? 14 : 15);
+        }
+
+		public void Begin()
+		{
+			if (!_isStarted) return;
+            OpenGate();
+            GameManager.GetMonoSystem<IUIMonoSystem>().Show<TimerView>(this);
+            GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().StartTimer();
+        }
 
 		public override void StartPuzzle()
 		{
-			_maze = MazeGenerator.Generate(_mazeWidth, _mazeHeight);
-			GenerateMaze();
-		}
+            if (_isStarted) return;
+            _isStarted = true;
+        }
 
 		private void Awake()
 		{
@@ -261,7 +280,8 @@ namespace PsychoSerum.Puzzle
 
 			_position = transform.position;
 
-			StartPuzzle();
+            _maze = MazeGenerator.Generate(_mazeWidth, _mazeHeight);
+            GenerateMaze(); ;
 		}
 
 		private void Update()

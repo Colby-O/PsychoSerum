@@ -13,6 +13,9 @@ namespace PsychoSerum.Puzzle
     {
         [SerializeField] private MazeController _mazeController;
 
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _audioClip;
+
         public void OpenGate(float t, Transform gate, float start, float end)
         {
             gate.localPosition = new Vector3(Mathf.Lerp(start, end, t), gate.localPosition.y, gate.localPosition.z);
@@ -20,6 +23,7 @@ namespace PsychoSerum.Puzzle
 
         public bool Interact(Interactor interactor)
         {
+            _audioSource?.PlayOneShot(_audioClip);
             _mazeController.Begin();
             return true;
         }

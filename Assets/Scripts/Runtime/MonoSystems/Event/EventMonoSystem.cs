@@ -2,15 +2,12 @@ using PlazmaGames.Core;
 using PsychoSerum.Ememy;
 using PsychoSerum.Enemy;
 using PsychoSerum.Interactables;
+using PsychoSerum.Puzzle;
 using PsychoSerum.Task;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using PsychoSerum.Puzzle;
-using Unity.Mathematics;
-using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace PsychoSerum.MonoSystem
 {
@@ -189,6 +186,36 @@ namespace PsychoSerum.MonoSystem
             door2.Lock();
 
             GameManager.GetMonoSystem<IDialogueMonoSystem>().Load(_dialouges[10]);
+
+        }
+
+        public void Event15()
+        {
+            // last puzzle end
+            Door door1 = GameObject.FindWithTag("Door6").GetComponent<Door>();
+            Door door2 = GameObject.FindWithTag("Door7").GetComponent<Door>();
+
+            door1.Unlock();
+            door2.Unlock();
+
+            GameManager.GetMonoSystem<IDialogueMonoSystem>().Load(_dialouges[11]);
+        }
+
+        public void Event16()
+        {
+            // last puzzle end
+            Door door1 = GameObject.FindWithTag("Door6").GetComponent<Door>();
+            Door door2 = GameObject.FindWithTag("Door7").GetComponent<Door>();
+
+            door1.Unlock();
+            door2.Unlock();
+
+            GameManager.GetMonoSystem<IDialogueMonoSystem>().Load(_dialouges[12]);
+        }
+
+        public void Event17()
+        {
+            FindObjectOfType<MazeController>().CloseGate();
         }
 
         public void Event100()
@@ -239,69 +266,69 @@ namespace PsychoSerum.MonoSystem
             StartCoroutine(End());
         }
 
-	public void Event1001(GameObject from)
-	{
-		Vector3 pos = PsychoSerumGameManager.player.transform.position;
-		float dir = Vector3.SignedAngle(
-			PsychoSerumGameManager.player.transform.forward,
-			Vector3.forward,
-			Vector3.up
-		);
+	    public void Event1001(GameObject from)
+	    {
+		    Vector3 pos = PsychoSerumGameManager.player.transform.position;
+		    float dir = Vector3.SignedAngle(
+			    PsychoSerumGameManager.player.transform.forward,
+			    Vector3.forward,
+			    Vector3.up
+		    );
 
-		MazeController mc = GameObject.FindObjectOfType<MazeController>();
-		Maze m = mc.GetMaze();
-		Vector3 mPos = mc.GetMazePosition();
-		float mScale = mc.GetMazeScale();
+		    MazeController mc = GameObject.FindObjectOfType<MazeController>();
+		    Maze m = mc.GetMaze();
+		    Vector3 mPos = mc.GetMazePosition();
+		    float mScale = mc.GetMazeScale();
 
-		Vector3 rel = pos - mPos;
-		int tx = (int)Mathf.Floor(rel.z / mScale);
-		int ty = (int)Mathf.Floor(rel.x / mScale);
+		    Vector3 rel = pos - mPos;
+		    int tx = (int)Mathf.Floor(rel.z / mScale);
+		    int ty = (int)Mathf.Floor(rel.x / mScale);
 
-		HashSet<Vector2Int> visited = new();
+		    HashSet<Vector2Int> visited = new();
 
-		List<Vector2Int> possible = new();
+		    List<Vector2Int> possible = new();
 
-		void travel(int x, int y, int dist)
-		{
-			Vector2Int pos = new(x, y);
-			if (m[x, y] != 1 || visited.Contains(pos)) return;
-			visited.Add(pos);
-			if (dist <= 0 && x != tx && y != ty)
-			{
-				possible.Add(pos);
-				return;
-			}
-			travel(x+1, y, dist-1);
-			travel(x-1, y, dist-1);
-			travel(x, y+1, dist-1);
-			travel(x, y-1, dist-1);
-		}
+		    void travel(int x, int y, int dist)
+		    {
+			    Vector2Int pos = new(x, y);
+			    if (m[x, y] != 1 || visited.Contains(pos)) return;
+			    visited.Add(pos);
+			    if (dist <= 0 && x != tx && y != ty)
+			    {
+				    possible.Add(pos);
+				    return;
+			    }
+			    travel(x+1, y, dist-1);
+			    travel(x-1, y, dist-1);
+			    travel(x, y+1, dist-1);
+			    travel(x, y-1, dist-1);
+		    }
 
-		if (m[tx, ty] != 1)
-		{
-			if (m[tx+1, ty] == 1) tx += 1;
-			else if (m[tx-1, ty] == 1) tx -= 1;
-			else if (m[tx, ty+1] == 1) ty += 1;
-			else if (m[tx, ty-1] == 1) ty -= 1;
-		}
-		travel(tx, ty, 5);
+		    if (m[tx, ty] != 1)
+		    {
+			    if (m[tx+1, ty] == 1) tx += 1;
+			    else if (m[tx-1, ty] == 1) tx -= 1;
+			    else if (m[tx, ty+1] == 1) ty += 1;
+			    else if (m[tx, ty-1] == 1) ty -= 1;
+		    }
+		    travel(tx, ty, 5);
 
-		if (possible.Count == 0) Debug.Log("NO SPAWN?????");
-		Vector2Int spawnSpot = possible.OrderBy(p => Mathf.Abs(
-			dir - Vector2.SignedAngle(new Vector2(tx, ty), (Vector2)p)
-		)).First();
+		    if (possible.Count == 0) Debug.Log("NO SPAWN?????");
+		    Vector2Int spawnSpot = possible.OrderBy(p => Mathf.Abs(
+			    dir - Vector2.SignedAngle(new Vector2(tx, ty), (Vector2)p)
+		    )).First();
 
-		Debug.Log(string.Format("[{0}, {1}] -> [{2}, {3}]", tx, ty, spawnSpot.x, spawnSpot.y));
+		    Debug.Log(string.Format("[{0}, {1}] -> [{2}, {3}]", tx, ty, spawnSpot.x, spawnSpot.y));
 
-		Vector3 spawnPos = new Vector3(
-			mPos.x + (float)spawnSpot.y * mScale,
-			mPos.y + 1.5f,
-			mPos.z + (float)spawnSpot.x * mScale
-		);
+		    Vector3 spawnPos = new Vector3(
+			    mPos.x + (float)spawnSpot.y * mScale,
+			    mPos.y + 1.5f,
+			    mPos.z + (float)spawnSpot.x * mScale
+		    );
 
-		GameObject c = GameObject.Instantiate(_spookyPrefab);
-		c.transform.position = spawnPos;
-	}
+		    GameObject c = GameObject.Instantiate(_spookyPrefab);
+		    c.transform.position = spawnPos;
+	    }
 
         public void RunEvent(int id, GameObject from = null)
         {
@@ -322,7 +349,10 @@ namespace PsychoSerum.MonoSystem
             else if (id == 100) Event100();
             else if (id == 101) Event101();
             else if (id == 102) Event102();
-	    else if (id == 1001) Event1001(from);
+	        else if (id == 1001) Event1001(from);
+            else if (id == 14) Event15();
+            else if (id == 15) Event16();
+            else if (id == 16) Event17();
         }
 
         private void Start()
