@@ -28,6 +28,7 @@ namespace PsychoSerum.Puzzle
 		private List<GameObject> _objects;
 
 		private float _scaleX, _scaleZ;
+		private Vector3 _position;
 
 		private Maze _maze;
 		private GameObject _mazeHolder;
@@ -36,6 +37,10 @@ namespace PsychoSerum.Puzzle
 		private bool _isTimerRunning = false;
 
 		[SerializeField] private float _timer = 0;
+
+		public Maze GetMaze() { return _maze; }
+		public Vector3 GetMazePosition() { return _position; }
+		public float GetMazeScale() { return _scaleX; }
 
 		private void ClearMaze()
 		{
@@ -95,6 +100,10 @@ namespace PsychoSerum.Puzzle
 
 			Vector2 endIndex = GetEndIndex(_maze);
 
+			bool placedCenter = false;
+			bool placedTR = false;
+			bool placedBR = false;
+
 			for (int y = 0; y < _maze.height; y++)
 			{
 				for (int x = 0; x < _maze.width; x++)
@@ -122,7 +131,35 @@ namespace PsychoSerum.Puzzle
 							floor.transform.GetChild(3).gameObject.SetActive(true);
 						}
 
+						if (
+							!placedCenter &&
+							x >= _maze.width / 4 && x <= _maze.width / 4 + 1 &&
+							y >= _maze.height / 4 && y <= _maze.height / 4 + 1
+						)
+						{
+							placedCenter = true;
+							floor.transform.GetChild(5).gameObject.SetActive(true);
+						}
 
+						if (
+							!placedTR &&
+							x >= _maze.width / 4.0f * 3.0f && x <= _maze.width / 4.0f * 3.0f + 1 &&
+							y >= _maze.height / 4.0f * 3.0f && y <= _maze.height / 4.0f * 3.0f + 1
+						)
+						{
+							placedTR = true;
+							floor.transform.GetChild(5).gameObject.SetActive(true);
+						}
+
+						if (
+							!placedBR &&
+							x >= _maze.width / 4.0f * 3.0f && x <= _maze.width / 4.0f * 3.0f + 1 &&
+							y >= _maze.height / 4.0f * 1.0f && y <= _maze.height / 4.0f * 1.0f + 1
+						)
+						{
+							placedBR = true;
+							floor.transform.GetChild(5).gameObject.SetActive(true);
+						}
 
 						continue;
 					}
@@ -221,6 +258,8 @@ namespace PsychoSerum.Puzzle
 
 			_scaleX = _wallPrefab.transform.GetChild(0).GetComponent<MeshRenderer>().bounds.size.x;
 			_scaleZ = _wallPrefab.transform.GetChild(0).GetComponent<MeshRenderer>().bounds.size.z;
+
+			_position = transform.position;
 
 			StartPuzzle();
 		}

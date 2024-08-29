@@ -6,8 +6,8 @@ using UnityEngine;
 namespace PsychoSerum.MonoSystem
 {
    internal interface IEventMonoSystem : IMonoSystem
-    {
-        public void RunEvent(int id);
-    }
+	{
+		public void RunEvent(int id, GameObject from = null);
+	}
 
 }

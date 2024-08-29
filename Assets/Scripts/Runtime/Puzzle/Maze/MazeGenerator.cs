@@ -10,7 +10,7 @@ namespace PsychoSerum.Puzzle
 		public int height;
 		private int[,] _data;
 
-        public Maze(int w, int h)
+		public Maze(int w, int h)
 		{
 			_data = new int[w, h];
 			width = w;
@@ -27,9 +27,9 @@ namespace PsychoSerum.Puzzle
 
 	public class MazeGenerator : MonoBehaviour
 	{
-        private static Maze _maze = null;
+		private static Maze _maze = null;
 
-        private static void Shuffle<T>(T[] arr)
+		private static void Shuffle<T>(T[] arr)
 		{
 			System.Random r = new System.Random();
 			int n = arr.Length;
@@ -45,7 +45,7 @@ namespace PsychoSerum.Puzzle
 		public static void ResetGenerator()
 		{
 			_maze = null;
-        }
+		}
 
 		public static Maze Generate(int width, int height)
 		{
@@ -79,12 +79,12 @@ namespace PsychoSerum.Puzzle
 				}
 			}
 
-			visit(1, 1);
-			m[1, 0] = 1;
+			visit(2, 1);
+			m[2, 0] = 1;
 
 			_maze = m;
 
-            return m;
+			return m;
 		}
 	}
 }
