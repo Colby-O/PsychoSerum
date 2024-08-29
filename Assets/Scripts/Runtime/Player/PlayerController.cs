@@ -149,8 +149,13 @@ namespace PsychoSerum.Player
 		{
 			PsychoSerumGameManager.allowInput = false;
 			StartCoroutine(JumpScaare());
-
 		}
+
+        public void ToggleCam(bool show)
+        {
+			_viewCover.SetActive(show);
+
+        }
 
         private void OnCollisionEnter(Collision collision)
         {

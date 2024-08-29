@@ -16,7 +16,7 @@ namespace PsychoSerum.MonoSystem
         [Header("Settings")]
         [SerializeField] private float _textSpeed = 1f;
         [SerializeField] private float _delayBetweenTextBlocks = 2f;
-        [SerializeField] private float _timeout => 3 + _delayBetweenTextBlocks;
+        [SerializeField] private float _timeout = 3;
         [SerializeField] private bool _allowTextSkip = false;
         private bool _isWriting = false;
 
@@ -78,13 +78,12 @@ namespace PsychoSerum.MonoSystem
                 _timeSinceDialogueStarted += Time.deltaTime;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space)) Next(); 
+            if (Input.GetKeyDown(KeyCode.Space) && !_isWriting) Next(); 
 
             if (_timeSinceDialogueStarted > _timeout) 
             {
                 _isWriting = false;
                 _audioSource.Stop();
-                //Next();
             }
         }
     }

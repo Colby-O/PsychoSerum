@@ -15,7 +15,7 @@ MonoBehaviour:
   _dialogues:
   - msg: 'This first test is designed to test the serum''s effect on memory retention. '
     dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}
-  - msg: "You\u2019re going to have 60 seconds to memorize the pattern on the monitor.
+  - msg: "You\u2019re going to have 30 seconds to memorize the pattern on the monitor.
       After which you are asked to place each cube on its corresponding plate. "
     dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}
   - msg: Goodluck.

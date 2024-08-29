@@ -78,6 +78,7 @@ namespace PsychoSerum.Puzzle
         {
             Debug.Log("Puzzle 1 Starting!");
             _isStarted = true;
+            _screenCover.SetActive(false);
             GameManager.GetMonoSystem<IUIMonoSystem>().Show<TimerView>();
             GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().StartStopwatch(_studyTime);
         }
@@ -102,7 +103,7 @@ namespace PsychoSerum.Puzzle
 
         private void Awake()
         {
-            _screenCover.SetActive(false);
+            _screenCover.SetActive(true);
             GeneratePuzzle();
         }
 

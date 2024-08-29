@@ -115,11 +115,11 @@ namespace PsychoSerum.Puzzle
 
 					if (Random.value > 0.25f)
 					{
-                        floor.transform.GetChild(2).gameObject.SetActive(Random.value < 0.1f);
+                        floor.transform.GetChild(2).gameObject.SetActive(Random.value < 0.2f);
                     }
 					else
 					{
-                        floor.transform.GetChild(6).gameObject.SetActive(Random.value < 0.1f);
+                        floor.transform.GetChild(6).gameObject.SetActive(Random.value < 0.2f);
 
                     }
 
@@ -136,9 +136,10 @@ namespace PsychoSerum.Puzzle
 							_objects.Add(key);
                             floor.transform.GetChild(2).gameObject.SetActive(true);
                             floor.transform.GetChild(4).gameObject.SetActive(true);
-						} else if (x == 1 && y == 0)
+						} else if (x == 2 && y == 0)
 						{
-							floor.transform.GetChild(3).gameObject.SetActive(true);
+                            floor.transform.GetChild(2).gameObject.SetActive(true);
+                            floor.transform.GetChild(3).gameObject.SetActive(true);
 						}
 
 						if (
@@ -250,8 +251,8 @@ namespace PsychoSerum.Puzzle
 				}
 			}
 
-            GameManager.GetMonoSystem<IUIMonoSystem>().ShowLast();
-            GameManager.GetMonoSystem<IEventMonoSystem>().RunEvent((_timeLimit > GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().GetTime()) ? 14 : 15);
+            GameManager.GetMonoSystem<IUIMonoSystem>().Show<GameView>();
+            GameManager.GetMonoSystem<IEventMonoSystem>().RunEvent(15);
         }
 
 		public void Begin()

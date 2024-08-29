@@ -14,10 +14,12 @@ namespace PsychoSerum.MonoSystem
     internal sealed class EventMonoSystem : MonoBehaviour, IEventMonoSystem
     {
         [SerializeField] private List<DialogueSO> _dialouges;
-	private GameObject _spookyPrefab;
+	    private GameObject _spookyPrefab;
 
         private GameObject _blood;
         private GameObject _group1;
+        private GameObject _bf;
+
         public void Event1()
         {
             // Intro
@@ -77,7 +79,7 @@ namespace PsychoSerum.MonoSystem
             GameManager.GetMonoSystem<IDialogueMonoSystem>().Load(_dialouges[4]);
 
             FindObjectOfType<Taskboard>().MarkTaskComplete(2);
-            FindObjectOfType<Taskboard>().AddTask(new Task.Task(2, "Complete Perception Test", false));
+            FindObjectOfType<Taskboard>().AddTask(new Task.Task(3, "Complete Perception Test", false));
         }
 
         public void Event7()
@@ -191,26 +193,39 @@ namespace PsychoSerum.MonoSystem
 
         public void Event15()
         {
-            // last puzzle end
+            // last puzzle end bad
             Door door1 = GameObject.FindWithTag("Door6").GetComponent<Door>();
             Door door2 = GameObject.FindWithTag("Door7").GetComponent<Door>();
+
+            GameObject.FindWithTag("Trigger 12").GetComponent<Trigger>().isActive = true;
+            GameObject.FindWithTag("Trigger18").GetComponent<Trigger>().isActive = true;
 
             door1.Unlock();
             door2.Unlock();
 
             GameManager.GetMonoSystem<IDialogueMonoSystem>().Load(_dialouges[11]);
+
+
+            FindObjectOfType<Taskboard>().MarkTaskComplete(4);
+            FindObjectOfType<Taskboard>().AddTask(new Task.Task(5, "Go back to your cell", false));
         }
 
         public void Event16()
         {
-            // last puzzle end
+            // last puzzle end good
             Door door1 = GameObject.FindWithTag("Door6").GetComponent<Door>();
             Door door2 = GameObject.FindWithTag("Door7").GetComponent<Door>();
+
+            GameObject.FindWithTag("Trigger 12").GetComponent<Trigger>().isActive = true;
+            GameObject.FindWithTag("Trigger18").GetComponent<Trigger>().isActive = true;
 
             door1.Unlock();
             door2.Unlock();
 
             GameManager.GetMonoSystem<IDialogueMonoSystem>().Load(_dialouges[12]);
+
+            FindObjectOfType<Taskboard>().MarkTaskComplete(4);
+            FindObjectOfType<Taskboard>().AddTask(new Task.Task(5, "Go back to your cell", false));
         }
 
         public void Event17()
@@ -218,21 +233,47 @@ namespace PsychoSerum.MonoSystem
             FindObjectOfType<MazeController>().CloseGate();
         }
 
-        public void Event100()
+        public void Event18()
         {
-            _blood.SetActive(true);
-
+            _bf.SetActive(true);
             Door door1 = GameObject.FindWithTag("SubjectDoors1").GetComponent<Door>();
             Door door2 = GameObject.FindWithTag("SubjectDoors2").GetComponent<Door>();
             Door door3 = GameObject.FindWithTag("SubjectDoors3").GetComponent<Door>();
             Door door4 = GameObject.FindWithTag("SubjectDoors4").GetComponent<Door>();
             Door door5 = GameObject.FindWithTag("SubjectDoors5").GetComponent<Door>();
 
+            door1.Close();
+            door2.Close();
+            door3.Close();
+            door4.Close();
+            door5.Close();
+
             door1.Lock();
             door2.Lock();
             door3.Lock();
             door4.Lock();
             door5.Lock();
+        }
+
+        public void Event19()
+        {
+            _bf.SetActive(false);
+            FindObjectOfType<Taskboard>().MarkTaskComplete(5);
+            GameManager.GetMonoSystem<IDialogueMonoSystem>().Load(_dialouges[13]);
+        }
+
+        public void Event100()
+        {
+            _blood.SetActive(true);
+
+            GameObject.FindWithTag("Trigger9").GetComponent<Trigger>().isActive = true;
+            GameObject.FindWithTag("Trigger10").GetComponent<Trigger>().isActive = true;
+
+            Door door1 = GameObject.FindWithTag("SubjectDoors1").GetComponent<Door>();
+            Door door2 = GameObject.FindWithTag("SubjectDoors2").GetComponent<Door>();
+            Door door3 = GameObject.FindWithTag("SubjectDoors3").GetComponent<Door>();
+            Door door4 = GameObject.FindWithTag("SubjectDoors4").GetComponent<Door>();
+            Door door5 = GameObject.FindWithTag("SubjectDoors5").GetComponent<Door>();
 
             door1.PlayBang();
             door2.PlayBang();
@@ -353,6 +394,8 @@ namespace PsychoSerum.MonoSystem
             else if (id == 14) Event15();
             else if (id == 15) Event16();
             else if (id == 16) Event17();
+            else if (id == 17) Event18();
+            else if (id == 18) Event19();
         }
 
         private void Start()
@@ -361,6 +404,8 @@ namespace PsychoSerum.MonoSystem
             _blood.SetActive(false);
             _group1 = GameObject.FindWithTag("EnemyGroup1");
             _group1.SetActive(false);
+            _bf = GameObject.FindWithTag("BeforeFinal");
+            _bf.SetActive(false);
             _spookyPrefab = Resources.Load<GameObject>("Prefabs/EnemyNoLightReal");
         }
     }

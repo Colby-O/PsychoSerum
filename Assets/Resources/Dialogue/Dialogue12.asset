@@ -15,4 +15,6 @@ MonoBehaviour:
   _dialogues:
   - msg: Your results have not displayed mental enhancements of any sort, perhaps
       the serum hinders one's mental capabilities.
-    dialogueEvent: {fileID: 11400000, guid: 2f77941504339b748b1c59bc43da9a0f, type: 2}
+    dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}
+  - msg: Now return to your cell.
+    dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}

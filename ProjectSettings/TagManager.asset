@@ -29,6 +29,11 @@ TagManager:
   - L3
   - L4
   - L5
+  - Trigger 12
+  - BeforeFinal
+  - Trigger9
+  - Trigger10
+  - Trigger18
   layers:
   - Default
   - TransparentFX

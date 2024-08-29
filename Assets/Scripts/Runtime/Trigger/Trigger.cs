@@ -14,7 +14,9 @@ namespace PsychoSerum
 		[SerializeField] private AudioSource _audioSource;
 		[SerializeField] private AudioClip _audioClip;
 
-		public bool isActive = true;
+        [SerializeField] bool _manual  = false;
+
+        public bool isActive = true;
 
 		private bool _triggered = false;
 
@@ -29,5 +31,16 @@ namespace PsychoSerum
 				GameManager.GetMonoSystem<IEventMonoSystem>().RunEvent(_id, other.gameObject);
 			}
 		}
-	}
+
+        private void Update()
+        {
+            if (_manual)
+			{
+                _triggered = true;
+                if (_audioSource != null && _audioClip != null) _audioSource.PlayOneShot(_audioClip);
+                GameManager.GetMonoSystem<IEventMonoSystem>().RunEvent(_id, null);
+				_manual = false;
+            }
+        }
+    }
 }
