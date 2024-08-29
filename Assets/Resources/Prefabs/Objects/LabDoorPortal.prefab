@@ -370,6 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  audioSource: {fileID: 3063700685892991168}
   other: {fileID: 0}
   door: {fileID: 6116951868823664308}
   display: {fileID: 6752430302988333401}
@@ -580,7 +581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 13
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ad7adfe1190f3c340805671ec16a9d15, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 3a244b5b43d5f144495e1b2a946dedf2, type: 2}

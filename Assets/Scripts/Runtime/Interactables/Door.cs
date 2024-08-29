@@ -17,6 +17,7 @@ namespace PsychoSerum.Interactables
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip _lockedSound;
         [SerializeField] private AudioClip _unlockSound;
+        [SerializeField] private AudioClip _bangSound;
 
         [SerializeField] private bool _isLocked;
 
@@ -95,6 +96,18 @@ namespace PsychoSerum.Interactables
         {
             _audioSource.PlayOneShot(_unlockSound);
             _isLocked = true;
+        }
+
+        public void PlayBang()
+        {
+            _audioSource.clip = _bangSound;
+            _audioSource.loop = true;
+            _audioSource.Play();
+        }
+
+        public void StopBang()
+        {
+            _audioSource.Stop();
         }
 
         private void Awake()

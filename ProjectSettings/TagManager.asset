@@ -11,6 +11,24 @@ TagManager:
   - Jumpscare2
   - Trigger4
   - Door4
+  - Door5
+  - Trigger6
+  - Door6
+  - Jumpscare3
+  - Door7
+  - Trigger8
+  - Blood
+  - SubjectDoors1
+  - SubjectDoors2
+  - SubjectDoors3
+  - SubjectDoors4
+  - SubjectDoors5
+  - EnemyGroup1
+  - L1
+  - L2
+  - L3
+  - L4
+  - L5
   layers:
   - Default
   - TransparentFX

@@ -14,7 +14,7 @@ namespace PsychoSerum.Inspectables
 
         public override void OnPickup(Interactor interactor)
         {
-            interactor.pickupManager.PickupPsychoSerum();
+            interactor.pickupManager.PickupPsychoSerum(_auidoclip);
             Destroy(gameObject);
         }
     }
