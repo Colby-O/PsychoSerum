@@ -72,7 +72,7 @@ MonoBehaviour:
   _type: 0
   offsetPoint: {fileID: 0}
   _auidoSource: {fileID: 2203095511924183778}
-  _auidoclip: {fileID: 8300000, guid: c11426578c7d93c43877723c2f60f9f7, type: 3}
+  _auidoclip: {fileID: 8300000, guid: 2585f351b6fdbd741a56113c6b3a048b, type: 3}
 --- !u!82 &2203095511924183778
 AudioSource:
   m_ObjectHideFlags: 0

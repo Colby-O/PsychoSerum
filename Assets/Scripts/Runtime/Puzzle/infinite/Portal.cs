@@ -10,7 +10,9 @@ namespace PsychoSerum.Puzzle
     internal class Portal : MonoBehaviour
     {
         public int id;
-        
+
+        public AudioSource audioSource;
+
         public Portal other;
         public PortalDoor door;
 

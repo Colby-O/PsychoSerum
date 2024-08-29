@@ -24,6 +24,8 @@ namespace PsychoSerum.Player
 		[SerializeField] private PlayerInput _playerInput;
         [SerializeField] private AudioSource _audioSource;
 		[SerializeField] private Taskboard _task;
+        [SerializeField] private GameObject _final;
+
         [Header("Body Part References")]
 		[SerializeField] private GameObject _head;
 
@@ -132,6 +134,28 @@ namespace PsychoSerum.Player
 		{
 			return _pickupManager;
 		}
+
+		private IEnumerator JumpScaare()
+		{
+			_viewCover.SetActive(true);
+            yield return new WaitForSeconds(5);
+            _viewCover.SetActive(false);
+            _final.SetActive(true);
+            yield return new WaitForSeconds(2);
+			Application.Quit();
+        }
+
+		public void Final()
+		{
+			PsychoSerumGameManager.allowInput = false;
+			StartCoroutine(JumpScaare());
+
+		}
+
+        private void OnCollisionEnter(Collision collision)
+        {
+			Debug.Log(collision.gameObject.name);
+        }
 
         private void Awake()
 		{

@@ -224,8 +224,6 @@ MonoBehaviour:
   _puzzleMonoSystem: {fileID: 5294151059966726961}
   _dialogueMonoSystem: {fileID: 1319133865069375}
   _eventMonoSystem: {fileID: 6002465712534519605}
-  dialogues:
-  - {fileID: 11400000, guid: 76583949f6b2bc441be0ab9ed149eea7, type: 2}
 --- !u!1 &3118298256273056343
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +275,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 86d64d6ba5cbef041816b3a4c6e504c4, type: 2}
   - {fileID: 11400000, guid: c82e3f4fd4beab84ea7267f15b83ad38, type: 2}
   - {fileID: 11400000, guid: 727ce0bd01e605e43ac6a3b17e5110c9, type: 2}
+  - {fileID: 11400000, guid: b5b8dbdb19896bf42a8eb7ed95c0dfe5, type: 2}
+  - {fileID: 11400000, guid: aa27d0cf1ea5d6943b9032763c6bec0a, type: 2}
+  - {fileID: 11400000, guid: 8d5e3e6de28466c4a8b850f300ec0642, type: 2}
+  - {fileID: 11400000, guid: b3d82d2f8c7e2bd4f9fb96798fddd4e8, type: 2}
+  - {fileID: 11400000, guid: e3f4331481332814bbcb6ec36a9df06f, type: 2}
 --- !u!1 &4113897271268753655
 GameObject:
   m_ObjectHideFlags: 0

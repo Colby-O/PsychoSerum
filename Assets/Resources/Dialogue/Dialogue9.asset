@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a35a24b3da178644af2fc549558f8f7, type: 3}
+  m_Name: Dialogue9
+  m_EditorClassIdentifier: 
+  _dialogues:
+  - msg: 'Your result are outstanding. This is very promising. '
+    dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}
+  - msg: "Your perception\u2026 is impeccable. It seems the Serum\u2019s effects
+      are taking hold faster than expected."
+    dialogueEvent: {fileID: 11400000, guid: c6ac31245c8d96d4f98a26eaa337bfdf, type: 2}

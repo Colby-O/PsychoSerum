@@ -6,6 +6,8 @@ using PsychoSerum.Helpers;
 using System.Linq;
 using TMPro;
 using Unity.Burst.CompilerServices;
+using PlazmaGames.Core;
+using PsychoSerum.MonoSystem;
 
 namespace PsychoSerum.Puzzle
 {
@@ -14,12 +16,23 @@ namespace PsychoSerum.Puzzle
         [SerializeField] private List<TMP_Text> _wrongHints;
         [SerializeField] private List<TMP_Text> _correctHints;
 
+        [SerializeField] private AudioClip _correctSound;
+        [SerializeField] private AudioClip _wrongSound;
+
         [SerializeField] private List<Portal> _portals;
         [SerializeField] private int _maxPuzzleLength = 4;
 
         [SerializeField] private List<int> _correctPath;
 
         [SerializeField] private List<int> _progress;
+
+        [SerializeField] private float _hintTime;
+        [SerializeField] private float _timeLimit;
+
+        private bool _displayedHint;
+
+        private bool _hasStarted = false;
+        private bool _finished = false;
 
         private void AssignPortals()
         {
@@ -49,7 +62,9 @@ namespace PsychoSerum.Puzzle
 
         private void FinsihPuzzle(bool sucessful)
         {
-            Debug.Log("Door Room Solved!");
+            _finished = true;
+            GameManager.GetMonoSystem<IUIMonoSystem>().ShowLast();
+            GameManager.GetMonoSystem<IEventMonoSystem>().RunEvent(sucessful ? 10 : 11);
         }
 
         private void SetActiveHint(int id)
@@ -69,8 +84,10 @@ namespace PsychoSerum.Puzzle
             }
         }
 
-        public void OnEnterPortal(int id)
+        public void OnEnterPortal(Portal portal)
         {
+            int id = portal.id;
+
             _progress.Add(id);
 
             for (int i = 0; i < _progress.Count; i++)
@@ -79,9 +96,12 @@ namespace PsychoSerum.Puzzle
                 {
                     _progress = new List<int>();
                     SetActiveHint(0);
+                    portal.other.audioSource.PlayOneShot(_wrongSound);
                     return;
                 }
             }
+
+            portal.other.audioSource.PlayOneShot(_correctSound);
 
             if (_progress.Count == _correctPath.Count) FinsihPuzzle(true);
             else SetActiveHint(_progress.Count);
@@ -89,6 +109,8 @@ namespace PsychoSerum.Puzzle
 
         public override void StartPuzzle()
         {
+            _hasStarted = true; 
+
             _correctPath = new List<int>();
             _progress = new List<int>();
 
@@ -115,12 +137,40 @@ namespace PsychoSerum.Puzzle
             }
 
             SetActiveHint(0);
+
+            GameManager.GetMonoSystem<IUIMonoSystem>().Show<TimerView>();
+            GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().StartStopwatch(_timeLimit);
+        }
+
+        private void DisplayHint()
+        {
+            _displayedHint = true;
+            GameManager.GetMonoSystem<IEventMonoSystem>().RunEvent(9);
+        }
+
+        public void CloseAll()
+        {
+            foreach (Portal portal in _portals) portal.door.Close();
         }
 
         private void Start()
         {
             _portals = FindObjectsOfType<Portal>().ToList();
-            StartPuzzle();
+        }
+
+        private void Update()
+        {
+            if (_finished || !_hasStarted) return;
+
+            if (!_displayedHint && GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().GetTime() <= _hintTime)
+            {
+                DisplayHint();
+            }
+
+            if (GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().GetTime() <= 0)
+            {
+                FinsihPuzzle(false);
+            }
         }
     }
 }

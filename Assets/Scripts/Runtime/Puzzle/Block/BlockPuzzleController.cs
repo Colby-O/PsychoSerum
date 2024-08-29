@@ -116,11 +116,11 @@ namespace PsychoSerum.Puzzle
                 _isSolving = true;
                 _screen.gameObject.SetActive(false);
                 _screenCover.SetActive(true);
-                GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().StartTimer();
+                GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().StartStopwatch(_timeLimit);
                 foreach (Block b in _blocks) b.GetComponent<MoveableObject>().allowInteract = true;
             }
 
-            if (_isSolving && GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().GetTime() >= _timeLimit)
+            if (_isSolving && GameManager.GetMonoSystem<IUIMonoSystem>().GetView<TimerView>().GetTime() <= 0)
             {
                 FinsihPuzzle(false);
             }

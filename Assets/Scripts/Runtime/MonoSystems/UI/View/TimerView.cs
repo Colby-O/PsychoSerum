@@ -9,6 +9,7 @@ namespace PsychoSerum.MonoSystem
     {
         [SerializeField] private GameObject _view;
         [SerializeField] private TMP_Text _timeText;
+        [SerializeField] private AudioSource _audioSource;
 
         private bool _isTimerOn = false;
         private bool _isStopWatchOn = false;
@@ -22,24 +23,28 @@ namespace PsychoSerum.MonoSystem
         public void StartTimer()
         {
             StopStopwatch();
+            _audioSource.Play();
             _isTimerOn = true;
             _time = 0f;
         }
 
         public void StopTimer()
         {
+            _audioSource.Stop();
             _isTimerOn = false;
         }
 
         public void StartStopwatch(float timeLimit)
         {
             StopTimer();
+            _audioSource.Play();
             _isStopWatchOn = true;
             _time = timeLimit;
         }
 
         public void StopStopwatch()
         {
+            _audioSource.Stop();
             _isStopWatchOn = true;
         }
 

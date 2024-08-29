@@ -16,9 +16,9 @@ namespace PsychoSerum.Player
         public bool hasPickupPsychoSerum = false;
         public bool hasPickupTaskList = false;
 
-        public void PickupPsychoSerum()
+        public void PickupPsychoSerum(AudioClip clip = null)
         {
-            _audioSource.PlayOneShot(_pickupSound);
+            _audioSource.PlayOneShot((clip != null) ? clip : _pickupSound);
             hasPickupPsychoSerum = true;
 
             if (hasPickupTaskList) GameManager.GetMonoSystem<IEventMonoSystem>().RunEvent(1);

@@ -19,10 +19,8 @@ namespace PsychoSerum.Puzzle
                 other.transform.position = new Vector3(_portal.other.target.position.x, other.transform.position.y, _portal.other.target.position.z);
                 if (_portal.other.target.transform.forward == _portal.target.transform.forward) pc.Rotate(180f);
                 pc.Enable();
-                _portal.door.Close();
-                _portal.other.door.Close();
-
-                FindObjectOfType<InfiniteController>().OnEnterPortal(_portal.id);
+                FindObjectOfType<InfiniteController>().CloseAll();
+                FindObjectOfType<InfiniteController>().OnEnterPortal(_portal);
             }
         }
     }

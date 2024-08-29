@@ -22,8 +22,6 @@ namespace PsychoSerum
         [SerializeField] private DialogueMonoSystem _dialogueMonoSystem;
 		[SerializeField] private EventMonoSystem _eventMonoSystem;
 
-        public List<DialogueSO> dialogues;
-
         public static bool allowInput = false;
         public static bool hasStarted = false;
 
